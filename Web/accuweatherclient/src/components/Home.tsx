@@ -6,6 +6,7 @@ import { Country } from "../types/Country";
 import { CurrentCondition } from "../types/CurrentCondition";
 import WeatherDetails from './WeatherDetails';
 import { Constants } from '../Constants';
+import { CityMetaData } from '../types/CityMetaData'
 
 interface IState {
     weather: Weather,
@@ -45,10 +46,9 @@ class Home extends React.Component {
         return {} as City;
     }
 
-    async getCurrentConditions(city: City) {
+    async getWeatherAsync(city: City) {
         try {
-            const res = await fetch(`${Constants.currentConditionsAPIUrl}/
-                                 ${city.Key}?apikey=${Constants.apiKey}`);
+            const res = await fetch(`${Constants.currentConditionsAPIUrl}/${city.Key}?apikey=${Constants.apiKey}`);
             const currentConditions = await res.json() as CurrentCondition[];
             if (currentConditions.length > 0) {
                 const weather = new Weather(currentConditions[0], city);
@@ -72,10 +72,10 @@ class Home extends React.Component {
         }
         try {
             const city = await this.getCities(searchText, countryCode);
-            console.log("---city---");
-            console.log(city);
             if (city.Key) {
-                await this.getCurrentConditions(city);
+                //await this.getCurrentConditions(city);
+                await this.updateLastAccessedCity(city);
+                await this.getWeatherAsync(city);
             }
         } catch (err) {
             await this.setStateAsync({ weather: { error: err } } as IState);
@@ -92,7 +92,43 @@ class Home extends React.Component {
         try {
             const countries = await this.getCountries();
             await this.setStateAsync({ countries: countries } as IState);
+
+            const lastCity = await this.getLastAccessedCity();
+            if (lastCity && lastCity.Key) {
+                await this.getWeatherAsync(lastCity);
+            }
         } catch (error) {
+        }
+    }
+
+    async updateLastAccessedCity(city: City) {
+        try {
+            const data = new CityMetaData(city);
+            await fetch(`${Constants.cityAPIUrl}`, {
+                method: 'post',
+                body: JSON.stringify(data)
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getLastAccessedCity(): Promise<City> {
+        try {
+            const res = await fetch(`${Constants.cityAPIUrl}`);
+            const data = await res.json() as CityMetaData;
+            return {
+                Key: data.id,
+                EnglishName: data.name,
+                Type: 'City',
+                Country: {
+                    ID: data.countryId,
+                    EnglishName: ''
+                }
+            } as City;
+        } catch (error) {
+            console.log(error);
+            return {} as City;
         }
     }
 
