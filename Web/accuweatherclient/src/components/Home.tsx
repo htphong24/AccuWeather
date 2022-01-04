@@ -67,7 +67,7 @@ class Home extends React.Component {
         e.preventDefault();
         if (!countryCode && !searchText) {
             await this.setStateAsync
-                ({ weather: { error: "Please enter the value." } } as IState);
+                ({ weather: { error: "Please enter a value." } } as IState);
             return;
         }
         try {
@@ -102,6 +102,7 @@ class Home extends React.Component {
     }
 
     async updateLastAccessedCity(city: City) {
+        console.log("Entering updateLastAccessedCity...");
         try {
             const data = new CityMetaData(city);
             await fetch(`${Constants.cityAPIUrl}`, {

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AccuWeather.Persistence;
+using AccuWeather.Persistence.Models;
 
 namespace Web.Services
 {
