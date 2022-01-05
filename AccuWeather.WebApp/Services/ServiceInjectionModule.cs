@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Web.Services
+namespace AccuWeather.WebApp.Services
 {
     public static class ServiceInjectionModule
     {

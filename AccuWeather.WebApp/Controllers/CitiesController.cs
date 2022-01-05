@@ -6,11 +6,11 @@ using AccuWeather.Persistence;
 using AccuWeather.Persistence.Models;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using Web.Services;
+using AccuWeather.WebApp.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Web.Controllers
+namespace AccuWeather.WebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

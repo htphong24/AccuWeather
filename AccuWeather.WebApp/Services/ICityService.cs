@@ -2,7 +2,7 @@
 using AccuWeather.Persistence;
 using AccuWeather.Persistence.Models;
 
-namespace Web.Services
+namespace AccuWeather.WebApp.Services
 {
     public interface ICityService
     {

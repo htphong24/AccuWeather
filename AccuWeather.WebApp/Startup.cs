@@ -13,9 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Web.Services;
+using AccuWeather.WebApp.Services;
 
-namespace Web
+namespace AccuWeather.WebApp
 {
     public class Startup
     {

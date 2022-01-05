@@ -7,7 +7,7 @@ using AccuWeather.Persistence.Models;
 using AccuWeather.Persistence.Repositories;
 using Serilog;
 
-namespace Web.Services
+namespace AccuWeather.WebApp.Services
 {
     public class CityService : ICityService
     {
