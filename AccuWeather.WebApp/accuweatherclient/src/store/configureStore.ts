@@ -5,13 +5,16 @@ import axiosMiddleware from 'redux-axios-middleware';
 import { AppActions } from "../types/Actions";
 import { countriesReducer } from "../reducers/countriesReducer";
 import { weatherReducer } from "../reducers/weatherReducer";
+
 export const rootReducer = combineReducers({
     countries: countriesReducer,
     weather: weatherReducer
 });
+
 const config: AxiosRequestConfig = {
     responseType: 'json'
 };
+
 const defaultClient = axios.create(config);
 export type AppState = ReturnType<typeof rootReducer>;
 export const store = createStore(rootReducer, applyMiddleware(axiosMiddleware(defaultClient),

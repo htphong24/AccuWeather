@@ -4,7 +4,6 @@ import AppRouter from "./router";
 import { Provider } from "react-redux";
 import { store } from './store/configureStore';
 
-
 const App: React.FC = () => {
     return (
         <Provider store={store}>
