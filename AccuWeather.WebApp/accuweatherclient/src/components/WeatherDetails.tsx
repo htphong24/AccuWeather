@@ -1,8 +1,12 @@
 ﻿import React from 'react';
+import { connect } from "react-redux";
+import { AppState } from "../store/configureStore";
 import { Weather } from '../types/Weather'
+
 interface IProp {
     weather: Weather,
 };
+
 class WeatherDetails extends React.Component<IProp> {
     render() {
         const weather = this.props.weather;
@@ -18,9 +22,7 @@ class WeatherDetails extends React.Component<IProp> {
                                         <tr>
                                             <td>
                                                 {
-                                                    weather.weatherIcon &&
-                                                    <img src={weather.weatherIcon}
-                                                        className="img-thumbnail" />
+                                                    weather.weatherIcon && <img src={weather.weatherIcon} className="img-thumbnail" />
                                                 }
                                             </td>
                                             <td>
@@ -37,8 +39,7 @@ class WeatherDetails extends React.Component<IProp> {
                                                 </span>}
                                             </td>
                                             <td>
-                                                <span>{weather.temperatureValue}&deg;
-                                                    {weather.temperatureUnit}</span>
+                                                <span>{weather.temperatureValue}&deg;{weather.temperatureUnit}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -57,4 +58,9 @@ class WeatherDetails extends React.Component<IProp> {
     }
 };
 
-export default WeatherDetails;
+
+const mapStateToProps = (state: AppState): IProp => ({
+    weather: state.weather
+});
+
+export default connect(mapStateToProps)(WeatherDetails)
