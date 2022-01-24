@@ -4,11 +4,12 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import axiosMiddleware from 'redux-axios-middleware';
 import { AppActions } from "../types/Actions";
 import { countriesReducer } from "../reducers/countriesReducer";
-import { weatherReducer } from "../reducers/weatherReducer";
+import { weatherReducer, weatherReducer2 } from "../reducers/weatherReducer";
 
 export const rootReducer = combineReducers({
     countries: countriesReducer,
-    weather: weatherReducer
+    weather: weatherReducer,
+    weather2: weatherReducer2,
 });
 
 const config: AxiosRequestConfig = {
