@@ -10,11 +10,7 @@ export const getCountries = (): AppActions => ({
     type: "GET_COUNTRIES",
     payload: {
         request: {
-            url: `${Constants.locationAPIUrl}/countries?apikey=${Constants.apiKey}`,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-            },
+            url: `${Constants.locationAPIUrl}/countries?apikey=${Constants.apiKey}`
         }
     }
 });
