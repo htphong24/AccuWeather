@@ -12,8 +12,10 @@ import { getCountries } from "../actions/Actions";
 
 interface IState {
     weather: Weather,
+    weather2: Weather,
     countries: Country[],
-    city?: City
+    city?: City,
+    city2?: City
 }
 
 interface IDispatchProps {
@@ -25,7 +27,9 @@ class Home extends React.Component<IDispatchProps, IState> {
     public state: IState = {
         countries: [],
         city: undefined,
-        weather: { error: "" } as Weather
+        city2: undefined,
+        weather: { error: "" } as Weather,
+        weather2: { error: "" } as Weather
     }
 
     async componentDidMount() {
